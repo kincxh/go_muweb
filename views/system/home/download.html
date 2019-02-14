@@ -1,0 +1,17 @@
+{{template "system/home/public.html"}}
+<tr>
+    <th>下载名称</th>
+    <th>说明</th>
+    <th>大小</th>
+    <th>来源</th>
+    <th>下载地址</th>
+</tr>
+{{range $k,$item :=.list}}
+<tr style="text-align: center">
+    <td>{{$item.DownName}}</td>
+    <td>{{$item.DownDescription}}</td>
+    <td>{{$item.DownSize}}</td>
+    <td>{{$item.DownOrigin}}</td>
+    <td><a href="{{str2html $item.DownUrl}}" target="_blank" style="color: red">点击下载</a></td>
+</tr>
+{{end}}

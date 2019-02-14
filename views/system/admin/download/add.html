@@ -1,0 +1,44 @@
+{{template "system/admin/head.html"}}
+<div class="alert alert-warning alert-dismissible hide" role="alert"></div>
+
+<form class="form-horizontal" method="post" action="{{urlfor "AdminDownLoadController.Add"}}">
+    <input type="hidden" name="id" value="{{.data.ID}}">
+    <div class="form-group">
+        <label for="down_name" class="col-sm-2 control-label">下载名称</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="down_name" name="down_name" value="{{.data.DownName}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="down_size" class="col-sm-2 control-label">文件大小</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="down_size" name="down_size" value="{{.data.DownSize}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="down_description" class="col-sm-2 control-label">文件介绍</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="down_description" name="down_description" value="{{.data.DownDescription}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="down_origin" class="col-sm-2 control-label">文件介绍</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="down_origin" name="down_origin" value="{{.data.DownOrigin}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="down_url" class="col-sm-2 control-label">下载地址</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="down_url" name="down_url" value="{{.data.DownUrl}}">
+        </div>
+    </div>
+
+    <div class="clearfix form-actions">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-info"><i class="ace-icon fa fa-check bigger-110"></i>提交</button>
+        </div>
+    </div>
+
+</form>
+{{template "system/admin/foot.html"}}

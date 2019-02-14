@@ -1,0 +1,53 @@
+{{template "system/admin/head.html"}}
+
+<div class="row">
+    <div class="col-xs-12">
+        <a href="{{urlfor "AdminDownLoadController.Add"}}" class="btn btn-sm btn-default"><i class="fa fa-plus"></i>
+            添加下载</a>
+    </div>
+</div>
+
+<div class="space-4"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>下载名称</th>
+                <th>下载源</th>
+                <th>文件大小</th>
+                <th>介绍</th>
+                <th>下载地址</th>
+                <th>时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{ range $k,$item := .list}}
+            <tr>
+                <td>{{$item.DownName}}</td>
+                <td>{{$item.DownOrigin}}</td>
+                <td>{{$item.DownSize}}</td>
+                <td>{{$item.DownDescription}}</td>
+                <td><a href="{{$item.DownUrl}}" target="_blank">下载</a></td>
+                <td>{{dateformat $item.UpdatedAt "2006年01月02日"}}</td>
+                <td>
+                    <a href="{{urlfor "AdminDownLoadController.Add"}}?id={{$item.ID}}">编辑</a> |
+                    <a href="{{urlfor "AdminDownLoadController.Del"}}?id={{$item.ID}}">删除</a>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="100" style="text-align: center">没有内容</td>
+            </tr>
+            {{end}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12"></div>
+</div>
+{{template "system/admin/foot.html"}}

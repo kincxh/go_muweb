@@ -1,0 +1,160 @@
+<script language="JavaScript" src="/static/items/alt.js"></script>
+<style>
+    .ItemsList {
+        overflow: hidden;
+        padding: 0;;
+        border: 0;
+        margin: 0 auto;
+        list-style: none;
+        width: 201px;
+        height: 184px;
+        background: url(/static/items/装备栏.jpg);
+        background-repeat: no-repeat;
+    }
+
+    .ItemsList li {
+        list-style: none;
+    }
+
+    .ItemsList img {
+        position: relative;
+        border: none;
+    }
+
+    .infoT {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    div#qTip {
+        BORDER: none;
+        DISPLAY: none;
+        FONT-SIZE: 12px;
+        Z-INDEX: 1000;
+        BACKGROUND: #666666;
+    / / #fefeda;
+        COLOR: #83B8FF;
+    / / #5f5f52;
+        LINE-HEIGHT: 16px;
+        FONT-FAMILY: "Tahoma";
+        POSITION: absolute;
+        TEXT-ALIGN: center;
+        padding: 16px;
+        margin-top: -16px;
+        WHITE-SPACE: nowrap;
+        opacity: 0.75;
+    / / -moz-opacity: 0.5;
+        ff和oper等浏览器下的半透明 filter: alpha(opacity = 75);
+    / / IE下的半透明
+    }
+</style>
+<tr>
+    <td colspan="4" style="vertical-align: middle;padding: 10px">
+        <form method="get">
+            分区：
+            <select name="server_id" style="margin-bottom: 0">
+            {{range $k,$v := .serverList}}
+                <option value="{{$k}}" {{if eq $k $.serverID}}selected{{end}}>{{$v.ServerName}}</option>
+            {{end}}
+            </select>
+            职业：<select name="class_id" style="margin-bottom: 0">
+            <option value="-1">全部</option>
+        {{range $k,$v := .class}}
+            <option value="{{$k}}" {{if eq $k $.classID}}selected{{end}}>{{$v}}</option>
+        {{end}}
+        </select>
+            <input type="submit" value="查询" class="buttons" style="margin-bottom: 0">
+        </form>
+    </td>
+</tr>
+<tr>
+    <th width="8%" align="center">排名</th>
+    <th width="18%" align="center">职业</th>
+    <th width="24%" align="center">角色信息</th>
+    <th width="50%" align="center">装备信息</th>
+</tr>
+{{range $k,$item :=.heroList}}
+<tr>
+    <td align="center" valign="center"><span style="font-weight: bolder;font-size: 26px">{{sum $k 1}}</span>
+    </td>
+    <td align="center" valign="center">
+        <img src="/static/items/{{map_get $.headImg $item.Character.Class | str2html}}" width="70" height="70">
+    </td>
+    <td align="left" valign="center">
+        昵称：<span style="color: red">{{$item.Character.Name}}</span><br>
+        职业：{{map_get $.class $item.Character.Class}}<br>
+        等级：{{$item.Character.Level}}<br>
+        状态：{{map_get $.pkLevelMap $item.Character.PkLevel}}<br>
+        杀人：{{$item.Character.PkCount}}<br>
+        总点：{{sum $item.Character.LevelUpPoint $item.Character.Strength $item.Character.Dexterity $item.Character.Vitality $item.Character.Energy}}<br>
+        金钱：{{$item.Character.Money}}<br>
+    {{if $.showPoint}}
+        <span style="color: blue">{{$.type}}：{{$item.Point}}<br></span>
+    {{end}}
+
+    </td>
+    <td align="center" valign="center">
+        <div align="center">
+            <table background="/static/items/装备栏.jpg" id="hero" cellpadding="0" style="width: 201px;height:184px;background-repeat:no-repeat;overflow: hidden">
+                <tr align="center">
+                    <td rowspan="2" colspan="2" style="width: 52px;height: 52px;padding: 0;border:0;margin:0"
+                        title="{{ $item.Pet.Html}}">{{str2html $item.Pet.Pic}}</td>
+                    <td style="width: 23px;height: 26px;padding: 0;border:0;margin:0"></td>
+                    <td rowspan="2" colspan="2" style="width: 52px;height: 52px;padding: 0;border:0;margin:0"
+                        title="{{ $item.Head.Html}}">{{str2html $item.Head.Pic}}</td>
+                    <td rowspan="2" colspan="3" align="right" style="width: 74px;height: 52px;padding: 0;border:0;margin:0"
+                        title="{{ $item.Fly.Html}}">{{str2html $item.Fly.Pic}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 23px;height: 26px;padding: 0;border:0;margin:0"></td>
+                </tr>
+                <tr align="center">
+                    <td rowspan="3" colspan="2" style="width: 52px;height: 80px;padding: 0;border:0;margin:0"
+                        title="{{ $item.LeftHand.Html}}">{{str2html $item.LeftHand.Pic}}</td>
+                    <td style="width: 23px;height: 28px;padding: 0;border:0;margin:0"
+                        title="{{ $item.Necklace.Html}}">{{str2html $item.Necklace.Pic}}</td>
+                    <td rowspan="3" colspan="2" style="width: 52px;height: 80px;padding: 0;border:0;margin:0"
+                        title="{{ $item.Body.Html}}">{{str2html $item.Body.Pic}}</td>
+                    <td rowspan="3" style="width: 22px;height: 80px;padding: 0;border:0;margin:0"></td>
+                    <td rowspan="3" colspan="2" style="width: 52px;height: 80px;padding: 0;border:0;margin:0"
+                        title="{{ $item.RightHand.Html}}">{{str2html $item.RightHand.Pic}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 22px;height: 26px;padding: 0;border:0;margin:0"></td>
+                </tr>
+                <tr>
+                    <td style="width: 22px;height: 26px;padding: 0;border:0;margin:0"></td>
+                </tr>
+                <tr align="center">
+                    <td rowspan="2" colspan="2" style="width: 52px;height: 52px;padding: 0;border:0;margin:0"
+                        title="{{ $item.Hand.Html}}">{{str2html $item.Hand.Pic}}
+                    </td>
+                    <td style="width: 23px;height: 29px;padding: 0;border:0;margin:0"
+                        title="{{ $item.LeftRing.Html}}">{{str2html $item.LeftRing.Pic}}
+                    </td>
+                    <td rowspan="2" colspan="2" style="width: 52px;height: 52px;padding: 0;border:0;margin:0"
+                        title="{{ $item.Leg.Html}}">{{str2html $item.Leg.Pic}}
+                    </td>
+                    <td style="width: 22px;height: 29px;padding: 0;border:0;margin:0"
+                        title="{{ $item.RightRing.Html}}">{{str2html $item.RightRing.Pic}}
+                    </td>
+                    <td rowspan="2" colspan="2" style="width: 52px;height: 52px;padding: 0;border:0;margin:0"
+                        title="{{ $item.Foot.Html}}">{{str2html $item.Foot.Pic}}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 23px;height: 23px;padding: 0;border:0;margin:0"></td>
+                    <td style="width: 22px;height: 23px;padding: 0;border:0;margin:0"></td>
+                </tr>
+            </table>
+        </div>
+    </td>
+</tr>
+{{end}}
+<tr>
+    <td colspan="100" align="center">
+        <a href="{{urlfor "IndexController.Hero"}}?server_id={{$.serverID}}&class_id={{$.classID}}&page=1">首页</a> |
+        <a href="{{urlfor "IndexController.Hero"}}?server_id={{$.serverID}}&class_id={{$.classID}}&page={{$.prevPage}}">上一页</a> |
+        <a href="{{urlfor "IndexController.Hero"}}?server_id={{$.serverID}}&class_id={{$.classID}}&page={{$.nextPage}}">下一页</a>
+    </td>
+</tr>

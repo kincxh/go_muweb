@@ -1,0 +1,30 @@
+{{template "system/home/public.html"}}
+<form name='leftForm' id="leftForm" method='post' action='{{urlfor "MemberLoginController.Login"}}' onsubmit="javascript:return checkLogin();">
+    <tr>
+        <td width="100" align="right">游戏分区：</td>
+        <td width="400">
+            <select name="server_id" size="1" id="server_id">
+            {{range $key,$server := .server_list}}
+                <option value="{{$server.ID}}" {{if eq $key 0 }} selected {{end}}>
+                {{$server.ServerName}}
+                </option>
+            {{end}}
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td align="right">游戏帐号：</td>
+        <td><input type='text' name='account' id='account' maxlength='10'/></td>
+    </tr>
+    <tr>
+        <td align="right">游戏密码：</td>
+        <td><input type='password' name='password' id='password' maxlength='12'/></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <input type="submit" value="登录"/>
+            <a href="{{urlfor "HomeLoginController.GetPassword"}}">忘记密码?</a> | <a href="{{urlfor "HomeLoginController.ChangePassword"}}">修改密码</a>
+        </td>
+    </tr>
+</form>

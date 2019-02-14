@@ -1,0 +1,16 @@
+{{template "system/home/public.html"}}
+<tr>
+    <td style="text-align: center">
+        <h2 style="color: {{.news.Color}}">{{.news.Title}}</h2>
+        <hr>
+    </td>
+</tr>
+<tr>
+    <td>
+    {{str2html .news.Contents}}
+        <hr>
+    </td>
+</tr>
+<tr>
+    <td align="right">{{dateformat .news.UpdatedAt "2006年01月02日"}}</td>
+</tr>

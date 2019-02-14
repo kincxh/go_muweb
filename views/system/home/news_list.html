@@ -1,0 +1,8 @@
+{{template "system/home/public.html"}}
+{{range $k,$item := .list}}
+<tr>
+    <td align="left"><a href="{{urlfor "HomeNewsController.Detail" ":id" $item.ID}}" style="color: {{$item.Color}}">{{$item.Title}}</a></td>
+    <td><span style="color: {{$item.Color}}">{{dateformat $item.UpdatedAt "2006年01月02日"}}</span></td>
+</tr>
+{{end}}
+

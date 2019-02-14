@@ -1,0 +1,61 @@
+{{template "system/admin/head.html"}}
+<div class="alert alert-warning alert-dismissible hide" role="alert"></div>
+<!-- Include external CSS. -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+<!-- Include Editor style. -->
+<link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/css/froala_style.min.css" rel="stylesheet" type="text/css"/>
+<div class="alert alert-warning alert-dismissible hide" role="alert"></div>
+<form class="form-horizontal" method="post" action="{{urlfor "AdminNewsController.Add"}}">
+
+    <div class="form-group">
+        <label for="server_name" class="col-sm-2 control-label">新闻标题</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="title" name="title" value="{{.news.Title}}">
+            <input type="hidden" id="id" name="id" value="{{.news.ID}}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="server_ip" class="col-sm-2 control-label">标题颜色</label>
+        <div class="col-sm-3">
+            <script src="/static/jscolor.js"></script>
+            <input class="jscolor" id="color" name="color" onchange="$('#title').attr('style','color:#'+$(this).val())">
+        </div>
+    </div>
+
+    <div class="form-group">
+            <textarea id="contents" name="contents" class="form-control">{{.news.Contents}}</textarea>
+    </div>
+
+    <div class="clearfix form-actions">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-info"><i class="ace-icon fa fa-check bigger-110"></i>提交</button>
+            <a href="{{urlfor "AdminServerController.List"}}" class="btn btn-default"><i
+                    class="ace-icon fa fa-reply bigger-110"></i>返回</a>
+        </div>
+    </div>
+
+</form>
+<!-- Include external JS libs. -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+<!-- Include Editor JS files. -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.pkgd.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/languages/zh_cn.js"></script>
+<script>
+    $(function () {
+        $('#contents').froalaEditor(
+                {
+                    imageUploadURL: '{{urlfor "AdminImageController.Upload"}}',//上传到本地服务器
+                    videoUploadURL: '{{urlfor "AdminImageController.Upload"}}',//上传到本地服务器
+                    language: 'zh_cn',
+                    enter: $.FroalaEditor.ENTER_BR,
+                }
+        )
+    });
+
+</script>
+{{template "system/admin/foot.html"}}

@@ -1,0 +1,86 @@
+{{template "system/home/public.html"}}
+<form name="thisForm" id="thisForm" method="post" action="" onsubmit="javascript:return checkGetPass();">
+        <input type="hidden" value="kincxh" name="reUserName">
+        <tbody>
+        <tr>
+            <td width="100" align="right">游戏分区:</td>
+            <td width="400">
+                <select name="server_id" size="1" id="server_id">
+                {{range $key,$server := .server_list}}
+                    <option value="{{$server.ID}}" {{if eq $key 0 }} selected {{end}}>
+                    {{$server.ServerName}}
+                    </option>
+                {{end}}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">游戏帐号：</td>
+            <td><input type='text' name='account' id='account' maxlength='10' value=""/></td>
+        </tr>
+        <tr>
+            <td align="right">注册邮箱：</td>
+            <td><input type='text' name='email' id='email' maxlength='10' value=""/></td>
+        </tr>
+        <tr>
+            <td align="right">问题提示:</td>
+            <td>
+                <div align="left">
+                    <select name="quest" id="quest">
+                        <option selected="" value="">--请您选择--</option>
+                        <option value="我手机号码的后6位？">我手机号码的后6位？</option>
+                        <option value="我母亲的生日？">我母亲的生日？</option>
+                        <option value="我父亲的生日？">我父亲的生日？</option>
+                        <option value="我最好朋友的生日？">我最好朋友的生日？</option>
+                        <option value="我儿时居住地的地址？">我儿时居住地的地址？</option>
+                        <option value="我小学校名全称？">我小学校名全称？</option>
+                        <option value="我中学校名全称？">我中学校名全称？</option>
+                        <option value="离我家最近的医院全称？">离我家最近的医院全称？</option>
+                        <option value="离我家最近的公园全称？">离我家最近的公园全称？</option>
+                        <option value="我的座右铭是？">我的座右铭是？</option>
+                        <option value="我最喜爱的电影？">我最喜爱的电影？</option>
+                        <option value="我最喜爱的歌曲？">我最喜爱的歌曲？</option>
+                        <option value="我最喜爱的食物？">我最喜爱的食物？</option>
+                        <option value="我最大的爱好？">我最大的爱好？</option>
+                        <option value="我最喜欢的小说？">我最喜欢的小说？</option>
+                        <option value="我最喜欢的运动队？">我最喜欢的运动队？</option>
+                    </select>如果无法滚动选择,请使用小键盘方向键滚动
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">问题答案:</td>
+            <td>
+                <input name="ans" type="text" id="ans" value="">
+                请输入注册时填写的密码保护！
+            </td>
+        </tr>
+        <tr>
+            <td align="right">新密码:</td>
+            <td>
+                <input name="oldpass" type="password" id="oldpass" maxlength="10" value="">
+                密码由半角英文、数字或下划线组成，长度为6~10位。不能和帐号相同
+            </td>
+        </tr>
+        <tr>
+            <td align="right">重输密码:</td>
+            <td>
+                <input name="moldpass" type="password" id="moldpass" maxlength="10" value="">
+            </td>
+        </tr>
+        <tr>
+            <td align="right">验证码:</td>
+            <td>
+                <input name="CheckCode" class="join_input" type="text" id="CheckCode" size="4" maxlength="4" height="20">&nbsp;<img id="yzmtu" name="yzmtu" src="/captcha" alt="验证码,看不清楚?请点击刷新验证码" style="cursor : pointer;" onclick="RefreshCheckCode('yzmtu')">&nbsp;<a onclick="RefreshCheckCode('yzmtu')" style="cursor : pointer;">看不清楚?请点击刷新验证码</a>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="找回密码">
+                <input type="reset" value="重置">
+            </td>
+        </tr>
+
+        </tbody>
+</form>

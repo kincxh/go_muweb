@@ -1,0 +1,151 @@
+{{template "system/home/public.html"}}
+<form onsubmit="return checkReg();" action="{{urlfor "MemberLoginController.RegSave"}}" method="post" name="thisForm" id="regForm">
+    <tr>
+        <td colspan="2" align="right">
+            <div align="left">温馨提示：请保管好您的密保信息，否则客服不进行任何账号隐私服务</div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="right">
+            <div align="left">温馨提示：注册请选择相对应的区,请认真填写帐号信息。</div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="right">
+            <div align="left">温馨提示：请珍惜您游戏帐号,请勿使用非法程序,卡决斗、卡马、加速等永久封停</div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="right">
+            <div align="left">温馨提示：账号请勿使用非法字符或纯数字,否则无法使用会员功能项目</div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="right">
+            <div align="left">温馨提示：角色请勿使用非法字符(例如:&amp;、%、*、$),否则无法使用会员功能项目</div>
+        </td>
+    </tr>
+    <tr>
+        <td width="100" align="right">选择游戏分区:</td>
+        <td width="420">
+            <div align="left">
+                <select name="server_id" size="1" id="server_id">
+                {{range $key,$server := .server_list}}
+                    <option value="{{$server.ID}}" {{if eq $key 0 }} selected {{end}}>
+                    {{$server.ServerName}}
+                    </option>
+                {{end}}
+                </select>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td height="30" align="right">帐号:</td>
+        <td>
+            <div align="left">
+                <input name="UserName" id="UserName" maxlength="10" type="text">
+                由半角英文.数字.下划线组成,长度为4~10位
+            </div>
+        </td>
+    </tr>
+
+    <tr>
+        <td height="30" align="right">密码:</td>
+        <td>
+            <div align="left">
+                <input name="oldpass" type="password" id="oldpass" maxlength="10">
+                请使用英文、数字不少于6位字符且区分大小写
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td height="30" align="right">重输密码:</td>
+        <td>
+            <div align="left">
+                <input name="moldpass" type="password" id="moldpass" maxlength="10">
+                请再次输入一次密码
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td height="30" align="right">绑定QQ:</td>
+        <td>
+            <div align="left">
+                <input name="name" id="name" maxlength="10">
+                请认真填写,以便日后找回账号使用
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td height="30" align="right">身份证号码:</td>
+        <td>
+            <div align="left">
+                <input name="num" id="num" maxlength="18">
+                身份证将作为您帐号所有权的唯一凭证
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td height="30" align="right">取回密码问题:</td>
+        <td>
+            <div align="left">
+                <select name="quest" id="quest">
+                    <option selected="" value="">--请您选择--</option>
+                    <option value="我手机号码的后6位？">我手机号码的后6位？</option>
+                    <option value="我母亲的生日？">我母亲的生日？</option>
+                    <option value="我父亲的生日？">我父亲的生日？</option>
+                    <option value="我最好朋友的生日？">我最好朋友的生日？</option>
+                    <option value="我儿时居住地的地址？">我儿时居住地的地址？</option>
+                    <option value="我小学校名全称？">我小学校名全称？</option>
+                    <option value="我中学校名全称？">我中学校名全称？</option>
+                    <option value="离我家最近的医院全称？">离我家最近的医院全称？</option>
+                    <option value="离我家最近的公园全称？">离我家最近的公园全称？</option>
+                    <option value="我的座右铭是？">我的座右铭是？</option>
+                    <option value="我最喜爱的电影？">我最喜爱的电影？</option>
+                    <option value="我最喜爱的歌曲？">我最喜爱的歌曲？</option>
+                    <option value="我最喜爱的食物？">我最喜爱的食物？</option>
+                    <option value="我最大的爱好？">我最大的爱好？</option>
+                    <option value="我最喜欢的小说？">我最喜欢的小说？</option>
+                    <option value="我最喜欢的运动队？">我最喜欢的运动队？</option>
+                </select>如果无法滚动选择,请使用小键盘方向键滚动
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td height="30" align="right">问题答案:</td>
+        <td>
+            <div align="left">
+                <input name="ans" type="text" id="ans" size="30" maxlength="50"> 很重要,找回密码时会用到!
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td height="30" align="right">Email:</td>
+        <td>
+            <div align="left">
+                <input name="email" type="text" id="email" size="30" maxlength="50">
+                很重要,找回密码时会用到!
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td height="30" align="right">验证码:</td>
+        <td>
+            <div align="left">
+                <input name="CheckCode" type="text" id="CheckCode" size="8" maxlength="4" height="20">&nbsp;<img
+                    id="yzmtu" name="yzmtu" src="/captcha" alt="验证码,看不清楚?请点击刷新验证码"
+                    style="cursor: pointer;" onclick="RefreshCheckCode('yzmtu')">&nbsp;<a
+                    onclick="RefreshCheckCode('yzmtu')" style="cursor: pointer;">看不清楚?请点击刷新验证码</a>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <div align="left">
+                <input type="submit" value="注册账号">
+                <input type="reset" value="资料重置">
+            </div>
+        </td>
+    </tr>
+</form>

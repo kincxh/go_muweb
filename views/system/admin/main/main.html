@@ -1,0 +1,113 @@
+{{template "system/admin/head.html"}}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="widget-box transparent">
+                        <div class="widget-header widget-header-flat">
+                            <h4 class="widget-title lighter">
+                                <i class="ace-icon fa fa-info-circle orange"></i>
+                                系统信息
+                            </h4>
+                        </div>
+
+                        <div class="widget-body">
+                            <div class="widget-main no-padding">
+                                <ul class="item-list">
+                                    <li class="item-orange">
+                                        程序版本：{{.version}}
+                                    </li>
+
+                                    <li class="item-red clearfix">
+                                        主机名称：{{.host_name}}
+                                    </li>
+
+                                    <li class="item-default clearfix ui-sortable-handle">
+                                        数据库版本：{{.sql_ver}}
+                                    </li>
+
+                                    <li class="item-blue clearfix ui-sortable-handle">
+                                        运行环境：{{.os}}, CPU数量: {{.cpu_num}}
+                                    </li>
+
+                                    <li class="item-pink clearfix ui-sortable-handle">
+                                        程序作者：智鹏 QQ：2770281706
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <script type="text/javascript">
+
+                $("<div id='chart_tooltip'></div>").css({
+                    position: "absolute",
+                    display: "none",
+                    border: "1px solid #000",
+                    color: "#fff",
+                    padding: "2px",
+                    "background-color": "#333",
+                    opacity: 0.60
+                }).appendTo("body");
+
+                $('#chart-sale').css({'width': '100%', 'min-height': '230px'});
+
+                $('#range a').on('click', function (e) {
+                    e.preventDefault();
+                    $(this).parent().parent().find('li').removeClass('active');
+                    $(this).parent().parent().find('li .blue i').addClass('invisible');
+                    $(this).parent().parent().find('li a').removeClass('blue');
+                    $(this).parent().addClass('active');
+                    $(this).addClass('blue');
+                    $(this).find('i').removeClass('invisible');
+
+                    $('#range').parent().find('button').html($(this).text() + '<i class="ace-icon fa fa-angle-down icon-on-right bigger-110"></i>');
+
+                    $.ajax({
+                        type: 'get',
+                        url: '/main/getpubstat?range=' + $(this).attr('href'),
+                        dataType: 'json',
+                        success: function (json) {
+                            var option = {
+                                bars: {
+                                    show: true,
+                                    fill: true,
+                                    lineWidth: 1
+                                },
+                                grid: {hoverable: true, clickable: true},
+                                yaxis: {ticks: 10, min: 0, tickDecimals: 0},
+                                xaxis: {
+                                    show: true,
+                                    ticks: json.ticks
+                                }
+                            };
+                            $.plot('#chart-sale', [{"label": "发版次数", "data": json.chart}], option);
+
+                            $('#chart-sale').bind('plothover', function (event, pos, item) {
+                                if (item) {
+                                    var x = option.xaxis.ticks[item.datapoint[0].toFixed(0) - 1][2],
+                                            y = item.datapoint[1].toFixed(0);
+
+                                    $("#chart_tooltip").html(x + ', ' + item.series.label + ": " + y)
+                                            .css({top: item.pageY + 5, left: item.pageX + 5})
+                                            .fadeIn(200);
+                                } else {
+                                    $("#chart_tooltip").hide();
+                                }
+
+                            });
+                        }
+                    });
+                });
+
+                $('#range .active a').trigger('click');
+
+            </script>
+
+
+        </div>
+    </div>
+{{template "system/admin/foot.html"}}

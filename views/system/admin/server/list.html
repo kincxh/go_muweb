@@ -1,0 +1,55 @@
+{{template "system/admin/head.html"}}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <a href="{{urlfor "AdminServerController.Add"}}" class="btn btn-sm btn-default"><i class="fa fa-plus"></i>
+                添加区服</a>
+        </div>
+    </div>
+
+    <div class="space-4"></div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th class="col-xs-2">分区名称</th>
+                    <th class="col-xs-1 center">ServerCode</th>
+                    <th class="col-xs-2">SQL IP</th>
+                    <th>SQL账号</th>
+                    <th>SQL密码</th>
+                    <th>SQL端口</th>
+                    <th>库名</th>
+                    <th class="col-xs-2">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{ range $k,$server := .server_list}}
+                <tr>
+                    <td>{{$server.ServerName}}</td>
+                    <td class="center">{{$server.ServerCode}}</td>
+                    <td>{{$server.ServerIp}}</td>
+                    <td>{{$server.ServerAccount}}</td>
+                    <td>***********</td>
+                    <td>{{$server.ServerPort}}</td>
+                    <td>{{$server.ServerDatabase}}</td>
+                    <td>
+                        <a href="{{urlfor "AdminServerController.Update"}}?id={{$server.ID}}">编辑</a> |
+                        <a href="{{urlfor "AdminServerController.Delete"}}?id={{$server.ID}}">删除</a>
+                    </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="100" style="text-align: center">请添加区服</td>
+                </tr>
+                {{end}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12"></div>
+    </div>
+{{template "system/admin/foot.html"}}

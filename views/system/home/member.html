@@ -1,0 +1,13 @@
+{{template "system/home/public.html"}}
+<tr>
+    <td align="right">账号：</td>
+    <td>{{.LoginMember.Account}}</td>
+</tr>
+<tr>
+    <td align="right">注册：</td>
+    <td>{{dateformat .LoginMember.ApplyDays "2006年01月02日"}}</td>
+</tr>
+<tr>
+    <td align="right">积分：</td>
+    <td>{{.LoginMember.Jf}}</td>
+</tr>

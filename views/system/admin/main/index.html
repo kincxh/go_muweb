@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>智鹏奇迹管理系统 QQ:2770281706</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="assets/font-awesome/4.2.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/chosen.min.css"/>
+    <link rel="stylesheet" href="assets/fonts/fonts.googleapis.com.css"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
+    <script src="assets/js/ace-extra.min.js"></script>
+    <script src="assets/js/jquery.2.1.1.min.js"></script>
+    <script src="assets/js/jquery-ui.min.js"></script>
+    <script src="assets/js/jquery-ui.custom.min.js"></script>
+    <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="assets/js/jquery.easypiechart.min.js"></script>
+    <script src="assets/js/jquery.sparkline.min.js"></script>
+    <script src="assets/js/jquery.flot.min.js"></script>
+    <script src="assets/js/jquery.flot.pie.min.js"></script>
+    <script src="assets/js/jquery.flot.resize.min.js"></script>
+    <script src="assets/js/chosen.jquery.min.js"></script>
+    <script src="assets/js/common.js"></script>
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/ace-elements.min.js"></script>
+    <script src="assets/js/ace.min.js"></script>
+
+</head>
+<body class="no-skin">
+
+<div id="navbar" class="navbar navbar-default">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('navbar', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <div class="navbar-container" id="navbar-container">
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+            <span class="sr-only">Toggle sidebar</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+        <div class="navbar-header pull-left">
+            <a href="/" class="navbar-brand"><i class="ace-icon fa fa-cloud-upload bigger-100"></i>
+                <small>智鹏网站系统</small>
+            </a>
+        </div>
+
+        <div class="navbar-buttons navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+                <li class="light-blue">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo" src="assets/avatars/avatar1.png"/>
+                        <span class="user-info">
+							<small>{{.admin.Account}}</small>
+                        {{.loginUser.Admin.Account}}
+						</span>
+                        <i class="ace-icon fa fa-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <!--
+                        <li>
+                            <a href="/profile">
+                                <i class="ace-icon fa fa-user"></i>
+                                个人信息
+                            </a>
+                        </li>
+                        -->
+                        <li class="divider"></li>
+                        <li>
+                            <a href="{{urlfor "AdminLoginController.Logout"}}">
+                                <i class="ace-icon fa fa-power-off"></i>
+                                退出登录
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+
+    <div id="sidebar" class="sidebar responsive">
+        <script type="text/javascript">
+            try {
+                ace.settings.check('sidebar', 'fixed')
+            } catch (e) {
+            }
+        </script>
+
+        <ul class="nav nav-list">
+
+
+            <li class="open">
+                <a>
+                    <i class="menu-icon fa fa-cloud-upload"></i>
+                    <span class="menu-text"> 基础设置 </span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+                <b class="arrow"></b>
+                <ul class="submenu">
+                    <li>
+                        <a href="{{urlfor "AdminConfigController.WebConfig"}}">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            网站设置
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li>
+                        <a href="{{urlfor "AdminServerController.List"}}">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            区服管理
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li>
+                        <a href="{{urlfor "AdminNewsController.NewsList"}}">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            新闻管理
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li>
+                        <a href="{{urlfor "AdminDownLoadController.List"}}">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            下载管理
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                </ul>
+            </li>
+
+            <!--
+                <a>
+                    <i class="menu-icon fa fa-bars"></i>
+                    <span class="menu-text"> 项目管理 </span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+                <b class="arrow"></b>
+                <ul class="submenu">
+
+                    <li>
+                        <a href="/project/list">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            项目管理
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li>
+                        <a href="/server/list">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            服务器管理
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li>
+                        <a href="/agent/list">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            跳板机管理
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+
+                </ul>
+            </li>
+            -->
+
+            <li class="open">
+                <a>
+                    <i class="menu-icon fa fa-cog"></i>
+                    <span class="menu-text"> 系统管理 </span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+                <b class="arrow"></b>
+                <ul class="submenu">
+                    <li>
+                        <a href="{{urlfor "AdminAdminController.UpdateAdmin"}}">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            修改密码
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+
+                </ul>
+            </li>
+
+
+        </ul>
+
+
+        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+            <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left"
+               data-icon2="ace-icon fa fa-angle-double-right"></i>
+        </div>
+
+        <script type="text/javascript">
+            try {
+                ace.settings.check('sidebar', 'collapsed')
+            } catch (e) {
+            }
+        </script>
+    </div>
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('breadcrumbs', 'fixed')
+                    } catch (e) {
+                    }
+                </script>
+
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="{{urlfor "AdminIndexController.Index"}}">首页</a>
+                    </li>
+                    <li class="active" id="page_name">系统概况</li>
+                </ul>
+
+            </div>
+
+            <iframe src="{{urlfor "AdminIndexController.Main"}}" frameborder="0" width="85%" height="100%" scrolling="auto"
+                    id="external-frame"></iframe>
+        </div>
+    </div>
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+</div>
+
+<div id="dialog-confirm" class="hide">
+    <div class="space-6"></div>
+    <p class="bigger-110 bolder center grey">
+        一旦删除将不可恢复，你确定吗？
+    </p>
+</div>
+
+<script type="text/javascript">
+    function setIframeHeight(iframe) {
+        if (iframe) {
+            var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+            if (iframeWin.document.body) {
+                iframe.height = 2000;
+                iframe.width = $(document.body).width() - $("#sidebar").width() - 1
+            }
+        }
+    };
+
+    $(window).on('load', function () {
+        setIframeHeight(document.getElementById('external-frame'));
+    })
+
+
+    $(function () {
+
+        $("li[class=open],li[class=close]").click(function () {
+            $(this).toggleClass("open", "close")
+        })
+
+        setIframeHeight(document.getElementById('external-frame'));
+
+        $(".submenu").children("li").children("a").on('click', function (e) {
+            $('#external-frame').attr("src", $(this).attr("href"))
+            $('#page_name').text($(this).text().trim())
+            setIframeHeight(document.getElementById('external-frame'));
+            return false
+        })
+    }());
+</script>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+{{template "system/home/public.html"}}
+<tr>
+    <th>名次</th>
+    <th>角色</th>
+    <th>等级</th>
+    <th>职业</th>
+    <th>PK状态</th>
+    <th>杀人数</th>
+</tr>
+{{range $k,$item :=.characterList}}
+<tr style="text-align: center">
+    <td>{{sum $k 1}}</td>
+    <td>{{$item.Name}}</td>
+    <td>{{$item.Level}}</td>
+    <td>{{map_get $.class $item.Class}}</td>
+    <td>{{map_get $.pkLevelMap $item.PkLevel}}</td>
+    <td>{{$item.PkCount}}</td>
+</tr>
+{{end}}

@@ -1,0 +1,136 @@
+{{template "system/admin/head.html"}}
+<!-- Include external CSS. -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+<!-- Include Editor style. -->
+<link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/css/froala_style.min.css" rel="stylesheet" type="text/css"/>
+<div class="alert alert-warning alert-dismissible hide" role="alert"></div>
+<form class="form-horizontal" method="post" action="{{urlfor "AdminConfigController.UpdateConfigs"}}">
+
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#web_site" data-toggle="tab">网站设置</a></li>
+        <li><a href="#web_site_content" data-toggle="tab">网站介绍</a></li>
+        <li><a href="#game_site" data-toggle="tab">游戏设置</a></li>
+        <li><a href="#reg_site" data-toggle="tab">注册设置</a></li>
+        <li><a href="#web_zz_tab" data-toggle="tab">游戏赞助</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="web_site">
+            <div class="form-group">
+                <label for="web_title" class="col-sm-2 control-label">网站标题</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="web_title" name="web_title" value="{{.configMap.web_title}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="web_keywords" class="col-sm-2 control-label">网站关键词</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="web_keywords" name="web_keywords" value="{{.configMap.web_keywords}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="web_description" class="col-sm-2 control-label">网站描述</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="web_description" name="web_description" value="{{.configMap.web_description}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="web_kf_qq" class="col-sm-2 control-label">网站客服QQ</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="web_kf_qq" name="web_kf_qq" value="{{.configMap.web_kf_qq}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="web_icp" class="col-sm-2 control-label">备案号</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="web_icp" name="web_icp" value="{{.configMap.web_icp}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="web_statistical" class="col-sm-2 control-label">网站统计代码</label>
+                <div class="col-sm-8">
+                    <textarea id="web_statistical" name="web_statistical" class="form-control">{{.configMap.web_statistical}}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="web_site_content">
+            <div class="form-group">
+                <textarea id="web_content" name="web_content" class="form-control">{{.configMap.web_content}}</textarea>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="game_site">
+            <div class="form-group">
+                <label for="game_name" class="col-sm-2 control-label">游戏名称</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="game_name" name="game_name" value="{{.configMap.game_name}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="server_name" class="col-sm-2 control-label">游戏版本</label>
+                <div class="col-sm-8">
+                    <select name="game_version">
+                    {{range $key,$item := .versionMap}}
+                        <option value="{{$key}}" {{if eq $key $.version}}selected{{end}}>{{$item}}</option>
+                    {{end}}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="reg_site">
+            <div class="form-group">
+                <label for="web_money" class="col-sm-2 control-label">送MU币</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="web_money" name="web_money" value="{{.configMap.web_money}}">
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="web_zz_tab">
+            <div class="form-group">
+                <label for="web_pay" class="col-sm-2 control-label">充值链接</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="web_pay" name="web_pay" value="{{.configMap.web_pay}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <textarea id="web_zz" name="web_zz" class="form-control">{{.configMap.web_zz}}</textarea>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix form-actions">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-info"><i class="ace-icon fa fa-check bigger-110"></i>提交</button>
+            <a href="{{urlfor "AdminServerController.List"}}" class="btn btn-default"><i
+                    class="ace-icon fa fa-reply bigger-110"></i>返回</a>
+        </div>
+    </div>
+</form>
+<!-- Include external JS libs. -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+<!-- Include Editor JS files. -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.pkgd.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/languages/zh_cn.js"></script>
+<script>
+    $(function () {
+        $('#web_content').froalaEditor(
+                {
+                    imageUploadURL: '{{urlfor "AdminImageController.Upload"}}',//上传到本地服务器
+                    videoUploadURL: '{{urlfor "AdminImageController.Upload"}}',//上传到本地服务器
+                    language: 'zh_cn',
+                    enter: $.FroalaEditor.ENTER_BR,
+                }
+        )
+        $('#web_zz').froalaEditor(
+                {
+                    imageUploadURL: '{{urlfor "AdminImageController.Upload"}}',//上传到本地服务器
+                    videoUploadURL: '{{urlfor "AdminImageController.Upload"}}',//上传到本地服务器
+                    language: 'zh_cn',
+                    enter: $.FroalaEditor.ENTER_BR,
+                }
+        )
+    });
+
+</script>
+{{template "system/admin/foot.html"}}

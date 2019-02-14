@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>{{.webConfig.web_title}}</title>
+
+    <meta name="keywords" content="{{.webConfig.web_keywords}}"/>
+    <meta name="description" content="{{.webConfig.web_description}}"/>
+
+    <link rel="stylesheet" href="/static/themes/whatmu/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/themes/whatmu/bootstrap-responsive.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/themes/whatmu/main.css?v=2016082801" type="text/css"/>
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/css/froala_style.min.css" rel="stylesheet" type="text/css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/static/themes/whatmu/jquery-1.10.2.min.js"></script>
+    <script src="/static/themes/whatmu/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+
+<div class="container">
+
+    <div id="header" class="span11">
+        <div class="header-title">
+        {{.webConfig.web_title}} <span class="cg" style="font-size:13px;">Play like no one else</span>
+        </div>
+    </div>
+    <div class=".navbar-inverse span11">
+    {{template "themes/whatmu/menu.html" .}}
+    </div>
+
+
+    <div id="content" class="fr-view span7" style="margin-left: 2em">
+        <table width="690" id="mu_table" style="border: 0;" align="center" cellpadding="0" cellspacing="8">
+        {{.LayoutContent}}
+        </table>
+    </div>
+
+
+    <div id="footer" class="span9">
+        <p>
+            Copyleft &copy; 2019-2020 <a href="/" class="c2">{{.webConfig.web_title}}</a>
+        </p>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var mu_table = $("#mu_table")
+        if (mu_table.find("#hero").length > 0) {
+            return;
+        }
+        mu_table.find('td').attr('style', "border:0;height:3em")
+    })
+</script>
+</body>
+</html>

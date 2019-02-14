@@ -1,0 +1,92 @@
+body {
+    font-family:"Hiragino Sans GB", Palatino, "Palatino Linotype", "Wenquanyi Zen Hei", "Georgia", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #222;
+    font-size:16px;
+    padding: 0;
+    margin: 0;
+    background-color:#FFFFCC;
+}
+
+.errorlist { color: red; }
+
+.header-title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #CC0000;
+}
+
+#content {
+    margin: 0;
+    padding: 0;
+}
+
+#content h1 {font-size: 24px; color: green;}
+#content h2 {font-size: 20px;}
+#content h3 {font-size: 18px;}
+#content h4 {font-size: 18px;}
+
+#footer {
+    margin-top: 20px;
+    border-top: 1px solid green;
+    font-family: Tahoma;
+    padding: 10px;
+}
+
+.cg {color: green;}
+.cr {color: red;}
+.cb {color: blue;}
+.cgr {color: #CCCCCC;}
+.c2 {color: #222;}
+.bold {font-weight:bold;}
+
+.price {
+    font-family: Monaco, Monospace, Courier, Fixedsys;
+}
+
+.lingshi {
+    color: #CC00FF;
+}
+
+.paginator{ font-size:11px;padding-top:10px;line-height:22px;margin:20px 0 0;}
+.paginator a:link,.paginator a:visited{padding:2px 6px;border:solid 1px #ccc;background:#aaa;text-decoration:none;}
+.paginator .end{border-width:2px!important;margin-right:6px;}
+.paginator .this-page{padding:2px 6px;font-weight:bold;font-size:13px;vertical-align:top;}
+.paginator a:hover{color:white;border-color:#036;}
+
+.gray {color: #CCCCCC; font-size:13px;}
+
+.thin {padding:0 !important; margin:0 !important;}
+.char_exp_percent {background-color:green; height: 6px;}
+
+.px12 {font-size:12px;}
+.px13 {font-size:13px;}
+.px24 {font-size:24px;}
+.px32 {font-size:32px;}
+.px48 {font-size:48px;}
+
+.pd10 {padding: 10px;}
+.pd20 {padding: 20px;}
+
+.king {
+    border: green 6px solid;
+    width: 256px;
+    height: 256px;
+    margin: 20px 20px 20px 0;
+    cursor: pointer;
+}
+
+.king_box { color: red; font-size:28px; font-weight: bold; width: 256px; height: 256px; }
+.king_label {padding-top: 108px; padding-left: 46px;}
+
+.zy-item-name {color: #2e8b57;}
+.div-ss-img {margin-top:20px; margin-bottom:40px; margin-left:10px;}
+.img-ss {border: 4px solid #2D6CA9; margin-bottom:16px;}
+
+.c-M {color: #CC00FF;}
+.c-Z {color: #CC00FF;}
+.c-L {color: #CC00FF;}
+.c-S {color: #CC00FF;}
+.c-C {color: mediumspringgreen;}
+.c-R {color: deepskyblue;}
